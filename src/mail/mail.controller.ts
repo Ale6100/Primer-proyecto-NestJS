@@ -30,16 +30,14 @@ export class MailController {
             );
         }
 
-        const dto = {
-            from,
-            to,
-            subject,
-            html,
-            attachments: attachments,
-        };
-
         try {
-            await this.mailService.create(dto);
+            await this.mailService.create({
+                from,
+                to,
+                subject,
+                html,
+                attachments: attachments,
+            });
         } catch (error) {
             throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR);
         }
